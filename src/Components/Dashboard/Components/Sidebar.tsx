@@ -20,7 +20,7 @@ const Sidebar: React.FC = () => {
       icon: <IoStatsChartSharp size={28} />,
     },
     { to: "/reports", label: "Reports", icon: <FaClipboard size={28} /> },
-    { to: "/me", label: "My Profile", icon: <FaUserAlt size={28} /> },
+    { to: "/me", label: "Profile", icon: <FaUserAlt size={28} /> },
     { to: "/logout", label: "Logout", icon: <MdOutlineLogout size={28} /> },
   ];
 

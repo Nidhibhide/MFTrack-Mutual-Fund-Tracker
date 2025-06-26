@@ -14,6 +14,9 @@ const Portfolio: React.FC<PortfolioProps> = ({ fundDetails }) => {
 
   return (
     <div className="py-12 px-5 w-full h-full">
+      <h1 className="text-2xl font-bold text-center mb-4">
+      My Portfolio
+      </h1>
       <div className="max-w-3xl mx-auto mb-8">
         <div className="grid md:grid-cols-3 gap-6 text-white">
           <div className="bg-blue-600 p-6 rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition duration-300 ease-in-out">

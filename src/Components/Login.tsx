@@ -8,7 +8,9 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { getMe } from "@/lib/api";
 import { setUser } from "@/Components/redux/features/authSlice";
-
+import dollar from "@/images/dollor.jpg";
+import Image from "next/image";
+import mutualFund from "@/images/mutualFund.jpeg";
 const schema = z.object({
   email: z.string().email("Invalid email address"),
   password: z
@@ -54,10 +56,12 @@ const Login: React.FC = () => {
       <div className="lg:w-[50%] w-full rounded-tl-2xl rounded-bl-2xl px-4 md:px-12 bg-white">
         <div className="h-full flex flex-col justify-center">
           <div className="flex  items-center md:mb-10 mb-6">
-            <img
-              src="https://static.vecteezy.com/system/resources/previews/000/572/811/original/vector-dollar-sign-money-icon.jpg"
-              className="h-20 w-20 object-fill"
+            <Image
+              src={dollar}
               alt="money-icon"
+              width={80}
+              height={80}
+              className="object-fill"
             />
             <p className="font-extrabold text-3xl md:text-4xl">MFTrack</p>
           </div>
@@ -111,12 +115,26 @@ const Login: React.FC = () => {
         </div>
       </div>
 
-      <div className="w-[50%] lg:block hidden">
-        <img
-          src="https://wallpapercave.com/wp/wp2665214.jpg"
-          alt="mutual fund tracker"
-          className="h-full w-full object-fill rounded-tr-2xl rounded-br-2xl"
-        />
+      {/* Right Side Content */}
+      <div className="w-[50%] lg:flex hidden flex-col items-center justify-center bg-gray-900 text-white rounded-3xl p-10">
+        <h2 className="text-5xl font-semibold mb-8 ">
+          Your Mutual Fund Companion
+        </h2>
+        <p className="text-lg text-gray-300 font-normal mb-6">
+          Track, manage, and grow your investments with real-time insights and
+          personalized reports.
+        </p>
+        <div className="flex justify-center">
+          <div className="w-full h-[500px] shadow-lg rounded-2xl overflow-hidden">
+            <Image
+              src={mutualFund}
+              alt="mutual fund overview"
+              width={1000}
+              height={500}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,36 +1,27 @@
 "use client";
-import React, { JSX } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/Components/redux/store";
 import { IoStatsChartSharp } from "react-icons/io5";
 import { MdOutlineLogout } from "react-icons/md";
 import { FaClipboard, FaUserAlt } from "react-icons/fa";
 import Link from "next/link";
-
-import { SidebarLink } from "@/lib/types";
+import { ISidebarLink } from "@/lib/types";
 
 const Sidebar: React.FC = () => {
+  const user = useSelector((state: RootState) => state.auth.user);
   const role = "USER";
+  const initial = user?.fullName?.charAt(0).toUpperCase() || "J";
 
-  const sidebarLinks: SidebarLink[] = [
+  const sidebarLinks: ISidebarLink[] = [
     {
       to: "/portfolio",
       label: "Portfolio",
       icon: <IoStatsChartSharp size={28} />,
     },
-    {
-      to: "/dashboard/setting",
-      label: "Reports",
-      icon: <FaClipboard size={28} />,
-    },
-    {
-      to: "/me",
-      label: "My Profile",
-      icon: <FaUserAlt size={28} />,
-    },
-    {
-      to: "/logout",
-      label: "Logout",
-      icon: <MdOutlineLogout size={28} />,
-    },
+    { to: "/reports", label: "Reports", icon: <FaClipboard size={28} /> },
+    { to: "/me", label: "My Profile", icon: <FaUserAlt size={28} /> },
+    { to: "/logout", label: "Logout", icon: <MdOutlineLogout size={28} /> },
   ];
 
   return (
@@ -39,10 +30,12 @@ const Sidebar: React.FC = () => {
         {/* Profile Section */}
         <div className="h-[150px] bg-blue-950 flex justify-center items-center gap-4">
           <div className="w-16 h-16 rounded-full bg-yellow-400 flex justify-center items-center">
-            <span className="text-3xl font-bold text-blue-950">N</span>
+            <span className="text-3xl font-bold text-blue-950">{initial}</span>
           </div>
           <div className="flex flex-col items-center justify-center">
-            <h1 className="text-xl font-semibold capitalize">Nidhi</h1>
+            <h1 className="text-xl font-semibold capitalize">
+              {user?.fullName || "John Doe"}
+            </h1>
             <p className="text-base font-medium text-green-500">{role}</p>
           </div>
         </div>

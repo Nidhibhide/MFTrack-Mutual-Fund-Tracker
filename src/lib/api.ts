@@ -1,9 +1,15 @@
 import axios from "axios";
+
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-//api calls
+
+const axiosInstance = axios.create({
+  baseURL: BASE_URL,
+  withCredentials: true,
+});
+
 export const registerUser = async (data: any) => {
   try {
-    const response = await axios.post("/register", data);
+    const response = await axios.post(`${BASE_URL}/register`, data);
     return response.data;
   } catch (error: any) {
     console.log(error);
@@ -12,7 +18,7 @@ export const registerUser = async (data: any) => {
 
 export const loginUser = async (data: any) => {
   try {
-    const response = await axios.post("/login", data, {
+    const response = await axios.post(`${BASE_URL}/login`, data, {
       withCredentials: true,
     });
     return response.data;
@@ -24,9 +30,7 @@ export const loginUser = async (data: any) => {
 
 export const getMe = async () => {
   try {
-    const response = await axios.get("/me", {
-      withCredentials: true,
-    });
+    const response = await axiosInstance.get("/me");
     return response.data;
   } catch (error: any) {
     console.log(error);
@@ -40,10 +44,30 @@ export const fundPortfolio = async () => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       cache: "no-store",
     });
     if (!response.ok) {
       throw new Error("Failed to fetch Funds");
+    }
+    return response.json();
+  } catch (error: any) {
+    console.log(error);
+  }
+};
+
+export const getTransactions = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/transactions`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch transactions");
     }
     return response.json();
   } catch (error: any) {

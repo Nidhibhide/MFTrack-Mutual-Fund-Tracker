@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import "./globals.css";
-import Dashboard from "@/Components/Dashboard/Dashboard";
+
 import ReduxProvider from "@/Components/redux/ReduxProvider";
+import AuthLayout from "@/Components/AuthLayout";
 
 export const metadata: Metadata = {
   title: "MF Tracker",
@@ -19,12 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ReduxProvider>
-          <div className="w-screen h-screen flex ">
-            <div>
-              <Dashboard />
-            </div>
-            <div className="flex-1">{children}</div>
-          </div>
+          <AuthLayout>{children}</AuthLayout>
         </ReduxProvider>
       </body>
     </html>

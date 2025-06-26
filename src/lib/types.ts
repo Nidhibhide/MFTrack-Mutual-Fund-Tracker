@@ -1,6 +1,6 @@
 import { JSX } from "react";
 
-export type Fund = {
+export type IFund = {
   id: number;
   fundName: string;
   totalUnits: number;
@@ -8,19 +8,29 @@ export type Fund = {
   currentValue: number;
 };
 
-export type SidebarLink = {
+export type ISidebarLink = {
   to: string;
   label: string;
   icon: JSX.Element;
 };
 
-export interface AuthState {
-  user: User | null;
+export interface IAuthState {
+  user: IUser | null;
   isAuthenticated: boolean;
 }
 
-export interface User {
+export interface IUser {
   fullName: string;
   email: string;
   phoneNumber: string;
+}
+
+export interface ITransaction {
+  id: number;
+  fundName: string;
+  action: "BUY" | "SELL";
+  units: number;
+  nav: number;
+  totalValue: number;
+  date: string;
 }

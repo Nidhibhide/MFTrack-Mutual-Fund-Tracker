@@ -5,6 +5,9 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginUser } from "@/lib/api";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { getMe } from "@/lib/api";
+import { setUser } from "@/Components/redux/features/authSlice";
 
 const schema = z.object({
   email: z.string().email("Invalid email address"),
@@ -16,10 +19,11 @@ const schema = z.object({
 });
 
 type FormData = z.infer<typeof schema>;
-const router = useRouter();
-const Login: React.FC = () => {
-  const [loading, setLoading] = useState(false);
 
+const Login: React.FC = () => {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -33,8 +37,11 @@ const Login: React.FC = () => {
     try {
       setLoading(true);
       const response = await loginUser(data);
-      console.log(response);
-      router.push("/dashboard");
+      const user = await getMe();
+      if (user) {
+        dispatch(setUser(user));
+        router.push("/dashboard");
+      }
     } catch (err: any) {
       console.log(err);
     } finally {

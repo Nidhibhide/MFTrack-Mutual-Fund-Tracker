@@ -1,9 +1,9 @@
 import Portfolio from "@/Components/Portfolio";
 import { fundPortfolio } from "@/lib/api";
-import { Fund } from "@/lib/types";
+import { IFund } from "@/lib/types";
 export default async function dashboard() {
   // const funds: Fund[] = await fundPortfolio();//api call
-  const funds:Fund[] = [
+  const funds:IFund[] = [
     {
       id: 1,
       fundName: "HDFC Equity Fund",

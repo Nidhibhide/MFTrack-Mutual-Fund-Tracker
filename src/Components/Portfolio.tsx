@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { Fund } from "@/lib/types";
+import { IFund } from "@/lib/types";
 
 type PortfolioProps = {
-  fundDetails: Fund[];
+  fundDetails: IFund[];
 };
 const Portfolio: React.FC<PortfolioProps> = ({ fundDetails }) => {
   const [funds, setFunds] = useState(fundDetails || []);

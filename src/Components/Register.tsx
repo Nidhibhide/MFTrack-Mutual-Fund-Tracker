@@ -46,7 +46,7 @@ const Register: React.FC = () => {
       setLoading(true);
       const response = await registerUser(data);
       console.log(response);
-      router.push("/");
+      router.push("/login");
     } catch (err: any) {
       console.error(err);
     } finally {

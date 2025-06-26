@@ -1,91 +1,57 @@
 "use client";
-import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 
-const schema = z.object({
-  fullName: z.string(),
-  email: z.string(),
-  phoneNumber: z.string(),
-});
-
-type FormData = z.infer<typeof schema>;
+import React from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/Components/redux/store";
+import { IUser } from "@/lib/types";
 
 const Profile = () => {
-  const {
-    register,
-    reset,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(schema),
-  });
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const res = await axios.get("/api/profile/me");
-        reset(res.data);
-      } catch (err) {
-        console.error("Failed to fetch profile", err);
-      }
-    };
-
-    fetchProfile();
-  }, [reset]);
+  const user = useSelector((state: RootState) => state.auth.user) as IUser | null;
 
   return (
-    <div className="min-h-screen flex items-center justify-center  px-4">
-      <div className="w-full max-w-lg  p-8 space-y-8">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-white">
+      <div className="w-full max-w-lg p-8 rounded-xl shadow-md border border-gray-200 bg-gray-50">
         <div className="flex flex-col items-center">
-          <div className="w-24 h-24 bg-purple-600 text-white text-4xl font-bold rounded-full flex items-center justify-center shadow-lg">
-            N
+          <div className="w-24 h-24 bg-gradient-to-tr from-purple-600 to-indigo-600 text-white text-4xl font-bold rounded-full flex items-center justify-center shadow-md">
+            {user?.fullName?.charAt(0).toUpperCase() || "J"}
           </div>
-          <h1 className="text-2xl font-semibold mt-4">My Profile</h1>
-          <p className="text-sm text-gray-500">View your basic details</p>
+          <h1 className="text-2xl font-semibold mt-4 text-gray-800">
+            My Profile
+          </h1>
+          <p className="text-sm text-gray-500">Basic account details</p>
         </div>
 
-        <form className="space-y-6">
+        <div className="mt-8 space-y-5">
           {/* Full Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-600 mb-1">
               Full Name
             </label>
-            <input
-              type="text"
-              readOnly
-              {...register("fullName")}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-700 shadow-sm focus:outline-none"
-            />
+            <div className="px-4 py-2 rounded-md bg-white border border-gray-300 text-gray-800 shadow-sm">
+              {user?.fullName || "John Doe"}
+            </div>
           </div>
 
           {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-600 mb-1">
               Email
             </label>
-            <input
-              type="email"
-              readOnly
-              {...register("email")}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-700 shadow-sm focus:outline-none"
-            />
+            <div className="px-4 py-2 rounded-md bg-white border border-gray-300 text-gray-800 shadow-sm">
+              {user?.email || "johndoe@gmail.com"}
+            </div>
           </div>
 
           {/* Phone Number */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-600 mb-1">
               Phone Number
             </label>
-            <input
-              type="text"
-              readOnly
-              {...register("phoneNumber")}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-700 shadow-sm focus:outline-none"
-            />
+            <div className="px-4 py-2 rounded-md bg-white border border-gray-300 text-gray-800 shadow-sm">
+              {user?.phoneNumber || "1234567890"}
+            </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

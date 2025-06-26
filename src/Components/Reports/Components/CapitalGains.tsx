@@ -11,9 +11,6 @@ import {
 import { ITransaction } from "@/lib/types";
 import { data as transactions } from "@/lib/dummyData";
 
-const getMonth = (dateStr: string) =>
-  new Date(dateStr).toLocaleString("default", { month: "short" });
-
 const computeGainsDataPerFund = (txs: ITransaction[]) => {
   const buys: Record<string, ITransaction[]> = {};
   const chart: Record<string, number> = {};

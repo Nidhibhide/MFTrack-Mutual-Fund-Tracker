@@ -3,7 +3,7 @@ import { fundPortfolio } from "@/lib/api";
 import { IFund } from "@/lib/types";
 import { funds } from "@/lib/dummyData";
 export default async function portfolio() {
-  // const funds: IFund[] = await fundPortfolio();
+  const funds: IFund[] = await fundPortfolio();
 
   return (
     <>

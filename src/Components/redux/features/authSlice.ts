@@ -3,7 +3,7 @@ import { IAuthState, IUser } from "@/lib/types";
 
 const initialState: IAuthState = {
   user: null,
-  isAuthenticated: true,
+  isAuthenticated: false,
 };
 
 

@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import router from "next/router";
-import { registerUser } from "@/app/lib/api";
+import { useRouter } from "next/navigation";
+import { registerUser } from "@/lib/api";
 
 // Zod validation schema
 const schema = z.object({
@@ -40,7 +40,7 @@ const Register: React.FC = () => {
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
-
+  const router = useRouter();
   const onSubmit = async (data: FormData) => {
     try {
       setLoading(true);
@@ -180,6 +180,3 @@ const Register: React.FC = () => {
 };
 
 export default Register;
-function resetForm() {
-  throw new Error("Function not implemented.");
-}

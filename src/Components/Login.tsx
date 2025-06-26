@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginUser } from "@/app/lib/api";
-import router from "next/router";
+import { loginUser } from "@/lib/api";
+import { useRouter } from "next/navigation";
 
 const schema = z.object({
   email: z.string().email("Invalid email address"),
@@ -16,7 +16,7 @@ const schema = z.object({
 });
 
 type FormData = z.infer<typeof schema>;
-
+const router = useRouter();
 const Login: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
@@ -34,7 +34,7 @@ const Login: React.FC = () => {
       setLoading(true);
       const response = await loginUser(data);
       console.log(response);
-      router.push("/");
+      router.push("/dashboard");
     } catch (err: any) {
       console.log(err);
     } finally {
@@ -94,8 +94,7 @@ const Login: React.FC = () => {
             </div>
 
             <button
-              // onClick={handleSubmit}
-              type="button"
+              type="submit"
               disabled={loading}
               className="bg-black text-white py-3 font-medium rounded-xl md:mb-4 mb-2 hover:bg-gray-700 hover:shadow-md transition duration-500 w-full"
             >

@@ -1,11 +1,9 @@
-import LandingPage from "@/Components/LandingPage";
 import Register from "@/Components/Register";
 
-export default function Home() {
+export default function home() {
   return (
     <>
-      {/* <LandingPage /> */}
-      <Register/>
+      <Register />
     </>
   );
 }

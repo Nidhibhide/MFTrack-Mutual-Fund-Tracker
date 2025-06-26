@@ -119,4 +119,5 @@ const Transactions: React.FC<PortfolioProps> = ({ transactionDetails }) => {
   );
 };
 
+
 export default Transactions;

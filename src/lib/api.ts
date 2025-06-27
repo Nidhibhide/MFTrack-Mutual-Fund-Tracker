@@ -39,7 +39,7 @@ export const getMe = async () => {
 
 export const fundPortfolio = async () => {
   try {
-    const response = await fetch(`${BASE_URL}/portfolio`, {
+    const response = await fetch("/portfolio", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
